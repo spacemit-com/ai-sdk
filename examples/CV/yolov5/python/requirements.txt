@@ -1,4 +1,0 @@
-onnxruntime
-opencv-python
-numpy==2.2.6
-spacemit-ort
