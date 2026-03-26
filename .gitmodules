@@ -16,3 +16,6 @@
 [submodule "vlm"]
 	path = vlm
 	url = https://github.com/spacemit-com/model-zoo-vlm
+[submodule "build"]
+	path = build
+	url = https://github.com/spacemit-robotics/build
