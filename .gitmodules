@@ -1,0 +1,18 @@
+[submodule "asr"]
+	path = asr
+	url = https://github.com/spacemit-com/model-zoo-asr.git
+[submodule "vision"]
+	path = vision
+	url = https://github.com/spacemit-com/model-zoo-vision.git
+[submodule "llm"]
+	path = llm
+	url = https://github.com/spacemit-com/model-zoo-llm.git
+[submodule "vad"]
+	path = vad
+	url = https://github.com/spacemit-com/model-zoo-vad.git
+[submodule "tts"]
+	path = tts
+	url = https://github.com/spacemit-com/model-zoo-tts
+[submodule "vlm"]
+	path = vlm
+	url = https://github.com/spacemit-com/model-zoo-vlm
