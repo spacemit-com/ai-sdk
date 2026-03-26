@@ -1,0 +1,62 @@
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.Python
+.venv/
+venv/
+.env
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+dist/
+*.egg-info/
+
+# "build" is a submodule in this repo; don't ignore it.
+# Ignore other build artifact dirs (common in Python/CMake projects).
+**/build/
+!/build/
+!/build/**
+
+# C/C++
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+install_manifest.txt
+cmake-build-*/
+
+# Build outputs / staging
+output/
+
+# Misc
+.cache/
+.tmp/
+tmp/
+*.tmp
+*.bak
+
