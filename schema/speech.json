@@ -1,0 +1,232 @@
+{
+  "id": "speech",
+  "name": "语音模型",
+  "nameEn": "Speech Models",
+  "description": "语音模型",
+  "performanceId": [
+    "任务",
+    "音频时长",
+    "处理时间",
+    "RTF",
+    "量化类型"
+  ],
+  "performanceIdEn": [
+    "Task",
+    "Audio Duration",
+    "Processing Time",
+    "RTF",
+    "Quant"
+  ],
+  "models": [
+    {
+      "id": "sensevoice",
+      "categoryIds": [
+        "speech"
+      ],
+      "iconSrc": "modelIcon4",
+      "experienceKind": "audio",
+      "title": "SenseVoice",
+      "titleEn": "SenseVoice",
+      "description": "多语种语音理解模型，支持语音识别，并具备语言识别、情感识别等能力。",
+      "descriptionEn": "A multilingual speech understanding model supporting ASR, language identification, and emotion recognition.",
+      "meta": {
+        "模型类型": "语音识别",
+        "语音支持": "多语种"
+      },
+      "metaEn": {
+        "Model Type": "Speech Recognition",
+        "Languages": "Multilingual"
+      },
+      "performance": {
+        "Quant": "INT8",
+        "Audio Duration": "",
+        "Processing Time": "",
+        "RTF": "0.35",
+        "Task": "Speech Recognition",
+        "量化类型": "INT8",
+        "任务": "语音识别",
+        "音频时长": "",
+        "处理时间": ""
+      },
+      "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/asr/sensevoice.tar.gz",
+      "plat": [
+        "K3"
+      ]
+    },
+    {
+      "id": "qwen3-asr-0-6b-dynq-q40",
+      "categoryIds": [
+        "speech"
+      ],
+      "iconSrc": "",
+      "experienceKind": "audio",
+      "title": "Qwen3-ASR-0.6B",
+      "titleEn": "Qwen3-ASR-0.6B",
+      "description": "Qwen3 0.6B 语音识别模型。",
+      "descriptionEn": "A Qwen3 ASR model with 0.6B parameters and dynamic Q4_0 quantization.",
+      "meta": {
+        "参数规模": "0.6B",
+        "量化": "DynQ Q4_0"
+      },
+      "metaEn": {
+        "Parameters": "0.6B",
+        "Quantization": "DynQ Q4_0"
+      },
+      "performance": {
+        "Quant": "Q4_0",
+        "Audio Duration": "",
+        "Processing Time": "",
+        "RTF": "0.35",
+        "Task": "Speech Recognition",
+        "量化类型": "Q4_0",
+        "任务": "语音识别",
+        "音频时长": "",
+        "处理时间": ""
+      },
+      "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/asr/qwen3-asr-0.6B-dynq-q40.tar.gz",
+      "plat": [
+        "K3"
+      ]
+    },
+    {
+      "id": "matcha-tts",
+      "categoryIds": [
+        "speech"
+      ],
+      "iconSrc": "modelIcon5",
+      "experienceKind": "text",
+      "title": "Matcha-TTS",
+      "titleEn": "Matcha-TTS",
+      "description": "高效文本转语音模型，可将文本自然合成为语音输出。",
+      "descriptionEn": "An efficient text-to-speech model that naturally synthesizes text into speech output.",
+      "meta": {
+        "模型类型": "语音合成",
+        "模型特点": "高速生成"
+      },
+      "metaEn": {
+        "Model Type": "Text-to-Speech",
+        "Feature": "Fast Generation"
+      },
+      "performance": {
+        "Quant": "FP32",
+        "Audio Duration": "",
+        "Processing Time": "",
+        "RTF": "0.49",
+        "Task": "Text-to-Speech",
+        "量化类型": "Q4_0",
+        "任务": "语音合成",
+        "音频时长": "",
+        "处理时间": ""
+      },
+      "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/tts/matcha-tts/",
+      "plat": [
+        "K3"
+      ]
+    },
+    {
+      "id": "matcha-icefall-en-us-ljspeech",
+      "categoryIds": [
+        "speech"
+      ],
+      "iconSrc": "",
+      "experienceKind": "text",
+      "title": "Matcha Icefall EN-US",
+      "titleEn": "Matcha Icefall EN-US",
+      "description": "英语 LJSpeech 数据集版 Matcha 声学模型。",
+      "descriptionEn": "A Matcha acoustic model trained on the English LJSpeech dataset.",
+      "meta": {
+        "模型类型": "语音合成",
+        "语种": "English"
+      },
+      "metaEn": {
+        "Model Type": "Text-to-Speech",
+        "Language": "English"
+      },
+      "performance": {
+        "Quant": "FP32",
+        "Audio Duration": "",
+        "Processing Time": "",
+        "RTF": "0.49",
+        "Task": "Text-to-Speech",
+        "量化类型": "Q4_0",
+        "任务": "语音合成",
+        "音频时长": "",
+        "处理时间": ""
+      },
+      "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/tts/matcha-tts/matcha-icefall-en_US-ljspeech.tar.gz",
+      "plat": [
+        "K3"
+      ]
+    },
+    {
+      "id": "matcha-icefall-zh-baker",
+      "categoryIds": [
+        "speech"
+      ],
+      "iconSrc": "",
+      "experienceKind": "text",
+      "title": "Matcha Icefall ZH-Baker",
+      "titleEn": "Matcha Icefall ZH-Baker",
+      "description": "中文 Baker 数据集版 Matcha 声学模型。",
+      "descriptionEn": "A Matcha acoustic model trained on the Chinese Baker dataset.",
+      "meta": {
+        "模型类型": "语音合成",
+        "语种": "中文"
+      },
+      "metaEn": {
+        "Model Type": "Text-to-Speech",
+        "Language": "Chinese"
+      },
+      "performance": {
+        "Quant": "FP32",
+        "Audio Duration": "",
+        "Processing Time": "",
+        "RTF": "0.49",
+        "Task": "Text-to-Speech",
+        "量化类型": "Q4_0",
+        "任务": "语音合成",
+        "音频时长": "",
+        "处理时间": ""
+      },
+      "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/tts/matcha-tts/matcha-icefall-zh-baker.tar.gz",
+      "plat": [
+        "K3"
+      ]
+    },
+    {
+      "id": "matcha-icefall-zh-en",
+      "categoryIds": [
+        "speech"
+      ],
+      "iconSrc": "",
+      "experienceKind": "text",
+      "title": "Matcha Icefall ZH-EN",
+      "titleEn": "Matcha Icefall ZH-EN",
+      "description": "中英双语 Matcha 声学模型。",
+      "descriptionEn": "A bilingual Chinese-English Matcha acoustic model.",
+      "meta": {
+        "模型类型": "语音合成",
+        "语种": "中英双语"
+      },
+      "metaEn": {
+        "Model Type": "Text-to-Speech",
+        "Language": "Chinese-English"
+      },
+      "performance": {
+        "Quant": "FP32",
+        "Audio Duration": "",
+        "Processing Time": "",
+        "RTF": "0.49",
+        "Task": "Text-to-Speech",
+        "量化类型": "Q4_0",
+        "任务": "语音合成",
+        "音频时长": "",
+        "处理时间": ""
+      },
+      "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/tts/matcha-tts/matcha-icefall-zh-en.tar.gz",
+      "plat": [
+        "K3"
+      ]
+    }
+  ]
+}
