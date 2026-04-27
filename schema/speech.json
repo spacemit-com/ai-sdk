@@ -39,14 +39,14 @@
       },
       "performance": {
         "Quant": "INT8",
-        "Audio Duration": "",
-        "Processing Time": "",
-        "RTF": "0.35",
+        "Audio Duration": "1802 ms",
+        "Processing Time": "232 ms",
+        "RTF": "0.129",
         "Task": "Speech Recognition",
         "量化类型": "INT8",
         "任务": "语音识别",
-        "音频时长": "",
-        "处理时间": ""
+        "音频时长": "1802 ms",
+        "处理时间": "232 ms"
       },
       "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/asr/sensevoice.tar.gz",
       "plat": [
@@ -54,71 +54,36 @@
       ]
     },
     {
-      "id": "qwen3-asr-0-6b-dynq-q40",
+      "id": "silero-vad",
       "categoryIds": [
         "speech"
       ],
       "iconSrc": "",
       "experienceKind": "audio",
-      "title": "Qwen3-ASR-0.6B",
-      "titleEn": "Qwen3-ASR-0.6B",
-      "description": "Qwen3 0.6B 语音识别模型。",
-      "descriptionEn": "A Qwen3 ASR model with 0.6B parameters and dynamic Q4_0 quantization.",
+      "title": "Silero VAD",
+      "titleEn": "Silero VAD",
+      "description": "基于 ONNX 的轻量级语音活动检测模型。",
+      "descriptionEn": "A lightweight ONNX model for voice activity detection.",
       "meta": {
-        "参数规模": "0.6B",
-        "量化": "DynQ Q4_0"
+        "模型类型": "语音活动检测",
+        "后端": "ONNX Runtime"
       },
       "metaEn": {
-        "Parameters": "0.6B",
-        "Quantization": "DynQ Q4_0"
-      },
-      "performance": {
-        "Quant": "Q4_0",
-        "Audio Duration": "",
-        "Processing Time": "",
-        "RTF": "0.35",
-        "Task": "Speech Recognition",
-        "量化类型": "Q4_0",
-        "任务": "语音识别",
-        "音频时长": "",
-        "处理时间": ""
-      },
-      "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/asr/qwen3-asr-0.6B-dynq-q40.tar.gz",
-      "plat": [
-        "K3"
-      ]
-    },
-    {
-      "id": "matcha-tts",
-      "categoryIds": [
-        "speech"
-      ],
-      "iconSrc": "modelIcon5",
-      "experienceKind": "text",
-      "title": "Matcha-TTS",
-      "titleEn": "Matcha-TTS",
-      "description": "高效文本转语音模型，可将文本自然合成为语音输出。",
-      "descriptionEn": "An efficient text-to-speech model that naturally synthesizes text into speech output.",
-      "meta": {
-        "模型类型": "语音合成",
-        "模型特点": "高速生成"
-      },
-      "metaEn": {
-        "Model Type": "Text-to-Speech",
-        "Feature": "Fast Generation"
+        "Model Type": "Voice Activity Detection",
+        "Backend": "ONNX Runtime"
       },
       "performance": {
         "Quant": "FP32",
-        "Audio Duration": "",
-        "Processing Time": "",
-        "RTF": "0.49",
-        "Task": "Text-to-Speech",
-        "量化类型": "Q4_0",
-        "任务": "语音合成",
-        "音频时长": "",
-        "处理时间": ""
+        "Audio Duration": "224.00 ms",
+        "Processing Time": "6.339 ms",
+        "RTF": "0.0283",
+        "Task": "Voice Activity Detection",
+        "量化类型": "FP32",
+        "任务": "语音活动检测",
+        "音频时长": "224.00 ms",
+        "处理时间": "6.339 ms"
       },
-      "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/tts/matcha-tts/",
+      "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/vad/silero.tar.gz",
       "plat": [
         "K3"
       ]
@@ -144,14 +109,14 @@
       },
       "performance": {
         "Quant": "FP32",
-        "Audio Duration": "",
-        "Processing Time": "",
-        "RTF": "0.49",
+        "Audio Duration": "2403 ms",
+        "Processing Time": "1180 ms",
+        "RTF": "0.491",
         "Task": "Text-to-Speech",
-        "量化类型": "Q4_0",
+        "量化类型": "FP32",
         "任务": "语音合成",
-        "音频时长": "",
-        "处理时间": ""
+        "音频时长": "2403 ms",
+        "处理时间": "1180 ms"
       },
       "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/tts/matcha-tts/matcha-icefall-en_US-ljspeech.tar.gz",
       "plat": [
@@ -179,14 +144,14 @@
       },
       "performance": {
         "Quant": "FP32",
-        "Audio Duration": "",
-        "Processing Time": "",
-        "RTF": "0.49",
+        "Audio Duration": "3784 ms",
+        "Processing Time": "1790 ms",
+        "RTF": "0.473",
         "Task": "Text-to-Speech",
-        "量化类型": "Q4_0",
+        "量化类型": "FP32",
         "任务": "语音合成",
-        "音频时长": "",
-        "处理时间": ""
+        "音频时长": "3784 ms",
+        "处理时间": "1790 ms"
       },
       "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/tts/matcha-tts/matcha-icefall-zh-baker.tar.gz",
       "plat": [
@@ -214,14 +179,14 @@
       },
       "performance": {
         "Quant": "FP32",
-        "Audio Duration": "",
-        "Processing Time": "",
-        "RTF": "0.49",
+        "Audio Duration": "3248 ms",
+        "Processing Time": "1121 ms",
+        "RTF": "0.345",
         "Task": "Text-to-Speech",
-        "量化类型": "Q4_0",
+        "量化类型": "FP32",
         "任务": "语音合成",
-        "音频时长": "",
-        "处理时间": ""
+        "音频时长": "3248 ms",
+        "处理时间": "1121 ms"
       },
       "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/tts/matcha-tts/matcha-icefall-zh-en.tar.gz",
       "plat": [
