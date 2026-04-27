@@ -6,12 +6,14 @@
   "performanceId": [
     "TTFT(ms)",
     "PP128(token/s)",
+    "PP512(token/s)",
     "TG128(token/s)",
     "量化类型"
   ],
   "performanceIdEn": [
     "TTFT(ms)",
     "PP128(token/s)",
+    "PP512(token/s)",
     "TG128(token/s)",
     "Quant"
   ],
@@ -38,8 +40,9 @@
       "performance": {
         "Quant": "Q4_0",
         "TTFT(ms)": "",
-        "TG128(token/s)": "",
         "PP128(token/s)": "",
+        "PP512(token/s)": "155.61",
+        "TG128(token/s)": "43.71",
         "量化类型": "Q4_0"
       },
       "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/llm/qwen2.5-0.5b-instruct-q4_0.gguf",
@@ -162,7 +165,8 @@
       "performance": {
         "Quant": "Q4_0",
         "PP128(token/s)": "478.45",
-        "TG128(token/s)": "49.36",
+        "PP512(token/s)": "108.81",
+        "TG128(token/s)": "31.74",
         "TTFT(ms)": "",
         "量化类型": "Q4_0"
       },
@@ -381,7 +385,8 @@
       "performance": {
         "Quant": "Q4_0",
         "PP128(token/s)": "59.64",
-        "TG128(token/s)": "24.30",
+        "PP512(token/s)": "40.55",
+        "TG128(token/s)": "23.38",
         "TTFT(ms)": "",
         "量化类型": "Q4_0"
       },
@@ -567,8 +572,9 @@
       "performance": {
         "Quant": "Q4_0",
         "TTFT(ms)": "",
-        "TG128(token/s)": "",
         "PP128(token/s)": "",
+        "PP512(token/s)": "80.15",
+        "TG128(token/s)": "18.77",
         "量化类型": "Q4_0"
       },
       "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/llm/deepseek-r1-distill-qwen-1.5b-q4_0.gguf",

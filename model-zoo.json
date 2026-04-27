@@ -5,8 +5,20 @@
       "name": "大语言模型",
       "nameEn": "Large Language Models",
       "description": "通用对话和文本生成模型",
-      "performanceId": ["TTFT(ms)", "PP128(token/s)", "TG128(token/s)", "量化类型"],
-      "performanceIdEn": ["TTFT(ms)", "PP128(token/s)", "TG128(token/s)", "Quant"],
+      "performanceId": [
+        "TTFT(ms)",
+        "PP128(token/s)",
+        "PP512(token/s)",
+        "TG128(token/s)",
+        "量化类型"
+      ],
+      "performanceIdEn": [
+        "TTFT(ms)",
+        "PP128(token/s)",
+        "PP512(token/s)",
+        "TG128(token/s)",
+        "Quant"
+      ],
       "models": [
         {
           "id": "qwen2-5-0-5b-q4-0",
@@ -30,8 +42,9 @@
           "performance": {
             "Quant": "Q4_0",
             "TTFT(ms)": "",
-            "TG128(token/s)": "",
             "PP128(token/s)": "",
+            "PP512(token/s)": "155.61",
+            "TG128(token/s)": "43.71",
             "量化类型": "Q4_0"
           },
           "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/llm/qwen2.5-0.5b-instruct-q4_0.gguf",
@@ -154,7 +167,8 @@
           "performance": {
             "Quant": "Q4_0",
             "PP128(token/s)": "478.45",
-            "TG128(token/s)": "49.36",
+            "PP512(token/s)": "108.81",
+            "TG128(token/s)": "31.74",
             "TTFT(ms)": "",
             "量化类型": "Q4_0"
           },
@@ -373,7 +387,8 @@
           "performance": {
             "Quant": "Q4_0",
             "PP128(token/s)": "59.64",
-            "TG128(token/s)": "24.30",
+            "PP512(token/s)": "40.55",
+            "TG128(token/s)": "23.38",
             "TTFT(ms)": "",
             "量化类型": "Q4_0"
           },
@@ -465,7 +480,7 @@
           },
           "performance": {
             "Quant": "Q4_0",
-             "TTFT(ms)": "",
+            "TTFT(ms)": "",
             "TG128(token/s)": "",
             "PP128(token/s)": "",
             "量化类型": "Q4_0"
@@ -558,9 +573,10 @@
           },
           "performance": {
             "Quant": "Q4_0",
-             "TTFT(ms)": "",
-            "TG128(token/s)": "",
+            "TTFT(ms)": "",
             "PP128(token/s)": "",
+            "PP512(token/s)": "80.15",
+            "TG128(token/s)": "18.77",
             "量化类型": "Q4_0"
           },
           "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/llm/deepseek-r1-distill-qwen-1.5b-q4_0.gguf",
@@ -1373,14 +1389,14 @@
           },
           "performance": {
             "Quant": "INT8",
-            "Audio Duration": "",
-            "Processing Time": "",
-            "RTF": "0.35",
+            "Audio Duration": "5000 ms",
+            "Processing Time": "940 ms",
+            "RTF": "0.188",
             "Task": "Speech Recognition",
             "量化类型": "INT8",
-             "任务": "语音识别",
-             "音频时长": "",
-             "处理时间": ""
+            "任务": "语音识别",
+            "音频时长": "5000 ms",
+            "处理时间": "940 ms"
           },
           "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/asr/sensevoice.tar.gz",
           "plat": [
@@ -1407,15 +1423,15 @@
             "Quantization": "DynQ Q4_0"
           },
           "performance": {
-            "Quant": "Q4_0",
-            "Audio Duration": "",
-            "Processing Time": "",
-            "RTF": "0.35",
+            "Quant": "DynQ Q4_0",
+            "Audio Duration": "5000 ms",
+            "Processing Time": "475 ms",
+            "RTF": "0.095",
             "Task": "Speech Recognition",
-            "量化类型": "Q4_0",
-             "任务": "语音识别",
-             "音频时长": "",
-             "处理时间": ""
+            "量化类型": "DynQ Q4_0",
+            "任务": "语音识别",
+            "音频时长": "5000 ms",
+            "处理时间": "475 ms"
           },
           "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/asr/qwen3-asr-0.6B-dynq-q40.tar.gz",
           "plat": [
@@ -1423,36 +1439,36 @@
           ]
         },
         {
-          "id": "matcha-tts",
+          "id": "silero-vad",
           "categoryIds": [
             "speech"
           ],
-          "iconSrc": "modelIcon5",
-          "experienceKind": "text",
-          "title": "Matcha-TTS",
-          "titleEn": "Matcha-TTS",
-          "description": "高效文本转语音模型，可将文本自然合成为语音输出。",
-          "descriptionEn": "An efficient text-to-speech model that naturally synthesizes text into speech output.",
+          "iconSrc": "",
+          "experienceKind": "audio",
+          "title": "Silero VAD",
+          "titleEn": "Silero VAD",
+          "description": "基于 ONNX 的轻量级语音活动检测模型。",
+          "descriptionEn": "A lightweight ONNX model for voice activity detection.",
           "meta": {
-            "模型类型": "语音合成",
-            "模型特点": "高速生成"
+            "模型类型": "语音活动检测",
+            "后端": "ONNX Runtime"
           },
           "metaEn": {
-            "Model Type": "Text-to-Speech",
-            "Feature": "Fast Generation"
+            "Model Type": "Voice Activity Detection",
+            "Backend": "ONNX Runtime"
           },
           "performance": {
             "Quant": "FP32",
-            "Audio Duration": "",
-            "Processing Time": "",
-            "RTF": "0.49",
-            "Task": "Text-to-Speech",
-            "量化类型": "Q4_0",
-            "任务": "语音合成",
-            "音频时长": "",
-            "处理时间": ""
+            "Audio Duration": "224.00 ms",
+            "Processing Time": "6.339 ms",
+            "RTF": "0.0283",
+            "Task": "Voice Activity Detection",
+            "量化类型": "FP32",
+            "任务": "语音活动检测",
+            "音频时长": "224.00 ms",
+            "处理时间": "6.339 ms"
           },
-          "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/tts/matcha-tts/",
+          "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/vad/silero.tar.gz",
           "plat": [
             "K3"
           ]
@@ -1478,14 +1494,14 @@
           },
           "performance": {
             "Quant": "FP32",
-            "Audio Duration": "",
-            "Processing Time": "",
-            "RTF": "0.49",
+            "Audio Duration": "2403 ms",
+            "Processing Time": "1180 ms",
+            "RTF": "0.491",
             "Task": "Text-to-Speech",
-            "量化类型": "Q4_0",
+            "量化类型": "FP32",
             "任务": "语音合成",
-            "音频时长": "",
-            "处理时间": ""
+            "音频时长": "2403 ms",
+            "处理时间": "1180 ms"
           },
           "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/tts/matcha-tts/matcha-icefall-en_US-ljspeech.tar.gz",
           "plat": [
@@ -1513,14 +1529,14 @@
           },
           "performance": {
             "Quant": "FP32",
-            "Audio Duration": "",
-            "Processing Time": "",
-            "RTF": "0.49",
+            "Audio Duration": "3784 ms",
+            "Processing Time": "1790 ms",
+            "RTF": "0.473",
             "Task": "Text-to-Speech",
-            "量化类型": "Q4_0",
+            "量化类型": "FP32",
             "任务": "语音合成",
-            "音频时长": "",
-            "处理时间": ""
+            "音频时长": "3784 ms",
+            "处理时间": "1790 ms"
           },
           "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/tts/matcha-tts/matcha-icefall-zh-baker.tar.gz",
           "plat": [
@@ -1548,14 +1564,14 @@
           },
           "performance": {
             "Quant": "FP32",
-            "Audio Duration": "",
-            "Processing Time": "",
-            "RTF": "0.49",
+            "Audio Duration": "3248 ms",
+            "Processing Time": "1121 ms",
+            "RTF": "0.345",
             "Task": "Text-to-Speech",
-            "量化类型": "Q4_0",
+            "量化类型": "FP32",
             "任务": "语音合成",
-            "音频时长": "",
-            "处理时间": ""
+            "音频时长": "3248 ms",
+            "处理时间": "1121 ms"
           },
           "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/tts/matcha-tts/matcha-icefall-zh-en.tar.gz",
           "plat": [
