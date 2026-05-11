@@ -38,7 +38,7 @@
           "performance": {
             "type": "int8",
             "shape": "[1,3,640,640]",
-            "FPS": "56.4"
+            "FPS": "70.8"
           },
           "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/vision/yolov11/yolo11n.q.onnx",
           "plat": [
@@ -66,8 +66,8 @@
           "performance": {
             "输入形状": "[1,3,640,640]",
             "Input Shape": "[1,3,640,640]",
-            "帧率（FPS）": "38.6",
-            "FPS": "38.6",
+            "帧率（FPS）": "45.3",
+            "FPS": "45.3",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
@@ -97,8 +97,8 @@
           "performance": {
             "输入形状": "[1,3,640,640]",
             "Input Shape": "[1,3,640,640]",
-            "帧率（FPS）": "21.0",
-            "FPS": "21.0",
+            "帧率（FPS）": "22.7",
+            "FPS": "22.7",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
@@ -128,8 +128,8 @@
           "performance": {
             "输入形状": "[1,3,640,640]",
             "Input Shape": "[1,3,640,640]",
-            "帧率（FPS）": "60.7",
-            "FPS": "60.7",
+            "帧率（FPS）": "97.1",
+            "FPS": "97.1",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
@@ -159,8 +159,8 @@
           "performance": {
             "输入形状": "[1,3,640,640]",
             "Input Shape": "[1,3,640,640]",
-            "帧率（FPS）": "41.9",
-            "FPS": "41.9",
+            "帧率（FPS）": "57.0",
+            "FPS": "57.0",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
@@ -190,8 +190,8 @@
           "performance": {
             "输入形状": "[1,3,640,640]",
             "Input Shape": "[1,3,640,640]",
-            "帧率（FPS）": "25.5",
-            "FPS": "25.5",
+            "帧率（FPS）": "30.6",
+            "FPS": "30.6",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
@@ -221,8 +221,8 @@
           "performance": {
             "输入形状": "[1,3,640,640]",
             "Input Shape": "[1,3,640,640]",
-            "帧率（FPS）": "35.9",
-            "FPS": "35.9",
+            "帧率（FPS）": "57.8",
+            "FPS": "57.8",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
@@ -257,8 +257,8 @@
           "performance": {
             "输入形状": "[1,3,640,640]",
             "Input Shape": "[1,3,640,640]",
-            "帧率（FPS）": "35.3",
-            "FPS": "35.3",
+            "帧率（FPS）": "41.1",
+            "FPS": "41.1",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
@@ -293,8 +293,8 @@
           "performance": {
             "输入形状": "[1,3,640,640]",
             "Input Shape": "[1,3,640,640]",
-            "帧率（FPS）": "68.9",
-            "FPS": "68.9",
+            "帧率（FPS）": "89.0",
+            "FPS": "89.0",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
@@ -324,8 +324,8 @@
           "performance": {
             "输入形状": "[1,3,640,640]",
             "Input Shape": "[1,3,640,640]",
-            "帧率（FPS）": "45.4",
-            "FPS": "45.4",
+            "帧率（FPS）": "53.0",
+            "FPS": "53.0",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
@@ -355,8 +355,8 @@
           "performance": {
             "输入形状": "[1,3,640,640]",
             "Input Shape": "[1,3,640,640]",
-            "帧率（FPS）": "26.7",
-            "FPS": "26.7",
+            "帧率（FPS）": "29.3",
+            "FPS": "29.3",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
@@ -391,8 +391,8 @@
           "performance": {
             "type": "int8",
             "shape": "640×640",
-            "帧率（FPS）": "27.6",
-            "FPS": "27.6"
+            "帧率（FPS）": "72.5",
+            "FPS": "72.5"
           },
           "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/vision/yolov8_seg/yolov8n-seg.q.onnx",
           "plat": [
@@ -420,8 +420,8 @@
           "performance": {
             "输入形状": "[1,3,640,640]",
             "Input Shape": "[1,3,640,640]",
-            "帧率（FPS）": "20.2",
-            "FPS": "20.2",
+            "帧率（FPS）": "43.9",
+            "FPS": "43.9",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
@@ -451,48 +451,12 @@
           "performance": {
             "输入形状": "[1,3,640,640]",
             "Input Shape": "[1,3,640,640]",
-            "帧率（FPS）": "14.9",
-            "FPS": "14.9",
+            "帧率（FPS）": "24.7",
+            "FPS": "24.7",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
           "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/vision/yolov8_seg/yolov8m-seg.q.onnx",
-          "plat": [
-            "K3"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "目标跟踪",
-      "models": [
-        {
-          "id": "avtrack-deit-tiny",
-          "categoryIds": [
-            "vision"
-          ],
-          "iconSrc": "",
-          "title": "AVTrack-DeiT-Tiny",
-          "titleEn": "AVTrack-DeiT-Tiny",
-          "description": "音视频联合目标跟踪模型。",
-          "descriptionEn": "An audio-visual target tracking model.",
-          "meta": {
-            "模型类型": "目标跟踪",
-            "骨干网络": "DeiT-Tiny"
-          },
-          "metaEn": {
-            "Model Type": "Tracking",
-            "Backbone": "DeiT-Tiny"
-          },
-          "performance": {
-            "输入形状": "[1,3,640,640]",
-            "Input Shape": "[1,3,640,640]",
-            "帧率（FPS）": "23",
-            "FPS": "23",
-            "量化类型": "INT8",
-            "Quant": "INT8"
-          },
-          "downloadUrl": "https://archive.spacemit.com/spacemit-ai/model_zoo/vision/AVTrack/avtrack_deit_tiny.q.onnx",
           "plat": [
             "K3"
           ]
@@ -523,8 +487,8 @@
           "performance": {
             "输入形状": "[1,3,112,112]",
             "Input Shape": "[1,3,112,112]",
-            "帧率（FPS）": "460.0",
-            "FPS": "460.0",
+            "帧率（FPS）": "531.9",
+            "FPS": "531.9",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
@@ -559,8 +523,8 @@
           "performance": {
             "输入形状": "[1,3,224,224]",
             "Input Shape": "[1,3,224,224]",
-            "帧率（FPS）": "153.5",
-            "FPS": "153.5",
+            "帧率（FPS）": "192.2",
+            "FPS": "192.2",
             "量化类型": "INT8",
             "Quant": "INT8"
           },
