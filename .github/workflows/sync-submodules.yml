@@ -1,0 +1,76 @@
+name: Sync submodules
+
+on:
+  workflow_dispatch:
+    inputs:
+      submodule:
+        description: "Optional submodule path to update, for example llm"
+        required: false
+        type: string
+  schedule:
+    - cron: "*/15 * * * *"
+
+concurrency:
+  group: sync-submodules
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  TARGET_BRANCH: main
+
+jobs:
+  sync:
+    name: Update submodule pointers on main
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout superproject
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ env.TARGET_BRANCH }}
+          submodules: recursive
+          token: ${{ secrets.SYNC_SUBMODULES_TOKEN || github.token }}
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Update tracked submodules
+        env:
+          REQUESTED_SUBMODULE: ${{ github.event.inputs.submodule || '' }}
+        run: |
+          set -euo pipefail
+
+          git submodule sync --recursive
+          git submodule update --init --recursive
+
+          if [ -n "${REQUESTED_SUBMODULE}" ]; then
+            git submodule update --remote --recursive -- "${REQUESTED_SUBMODULE}"
+          else
+            git submodule update --remote --recursive
+          fi
+
+          git status --short
+
+      - name: Commit and push to main
+        run: |
+          set -euo pipefail
+
+          submodule_paths=(asr build gateway llm rl tts vad vision vlm voiceprint)
+
+          if git diff --quiet -- .gitmodules "${submodule_paths[@]}"; then
+            echo "No submodule pointer changes."
+            exit 0
+          fi
+
+          git add .gitmodules "${submodule_paths[@]}"
+          git commit \
+            -m "Update submodules" \
+            -m "Trigger: ${GITHUB_EVENT_NAME}"
+
+          git pull --rebase origin "${TARGET_BRANCH}"
+          git push origin "HEAD:${TARGET_BRANCH}"
