@@ -26,3 +26,15 @@
 	path = build
 	url = https://github.com/spacemit-robotics/build
 	branch = main
+[submodule "gateway"]
+	path = gateway
+	url = https://github.com/spacemit-com/ai-gateway
+	branch = main
+[submodule "voiceprint"]
+	path = voiceprint
+	url = https://github.com/spacemit-com/model_zoo_voiceprint
+	branch = main
+[submodule "rl"]
+	path = rl
+	url = https://github.com/spacemit-com/model_zoo_rl
+	branch = main
