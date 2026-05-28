@@ -1,6 +1,6 @@
-# SpacemiT Model Zoo
+# SpacemiT AI SDK
 
-SpacemiT Model Zoo 是面向进迭时空 K 系列芯片适配的 AI 能力集合仓库。本仓库以 **Git Submodule** 的方式组织各组件代码，便于按需拉取、独立演进与集成。
+SpacemiT AI SDK 是面向进迭时空 K 系列芯片适配的 AI 能力集合仓库。本仓库以 **Git Submodule** 的方式组织各组件代码，便于按需拉取、独立演进与集成。
 
 ## 1. 项目简介
 
@@ -12,11 +12,11 @@ SpacemiT Model Zoo 是面向进迭时空 K 系列芯片适配的 AI 能力集合
   - **`asr/`**：语音识别（ASR）
   - **`tts/`**：语音合成（TTS）
 - **自然语言（`llm/`）**：对接 OpenAI 兼容服务（如 `llama-server`），提供 `llm_chat` 等示例便于快速体验与集成
-- **VLM（`vlm/`）**：视觉语言模型相关能力（如有）
+- **多模态（`vlm/`）**：视觉语言模型相关能力
 
 > 说明：各组件示例请直接参考对应子仓库目录中的 `examples/` 与 README。
 
-Model Zoo 关键目录速览（本仓库根目录即组件目录）：
+AI SDK 关键目录速览（本仓库根目录即组件目录）：
 
 - **`vision/`**：计算机视觉 SDK + `examples/`
 - **`asr/`**：语音识别 SDK（统一 API + 示例）
@@ -39,15 +39,15 @@ Model Zoo 关键目录速览（本仓库根目录即组件目录）：
 本仓库使用 Git Submodule 管理各组件源码，推荐递归拉取：
 
 ```bash
-git clone --recurse-submodules git@github.com:spacemit-com/model-zoo.git
-# 或 HTTPS
-# git clone --recurse-submodules https://github.com/spacemit-com/model-zoo.git
+git clone --recurse-submodules https://github.com/spacemit-com/ai-sdk.git
+# 或 SSH
+#git clone --recurse-submodules git@github.com:spacemit-com/ai-sdk.git
 ```
 
 如果你已经 clone 了主仓库但没拉子仓库：
 
 ```bash
-cd model-zoo
+cd ai-sdk
 git submodule update --init --recursive
 ```
 
@@ -214,3 +214,7 @@ llm_chat "你好" "http://localhost:8080/v1" "qwen2.5-0.5b" "You are a helpful a
 export OPENAI_API_KEY=你的云端key
 llm_chat "你好" "https://api.deepseek.com" "deepseek-chat" "You are a helpful assistant." 256
 ```
+
+## 4. 文档
+
+更多使用说明请参看 [SpacemiT AI SDK 文档](https://www.spacemit.com/community/document/info?lang=zh&nodepath=ai/application_tools/ai-sdk.md)。
