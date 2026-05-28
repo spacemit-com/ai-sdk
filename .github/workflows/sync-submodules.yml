@@ -67,10 +67,38 @@ jobs:
             exit 0
           fi
 
+          mapfile -t changed_submodules < <(git diff --name-only -- "${submodule_paths[@]}")
+
+          if ((${#changed_submodules[@]} == 0)); then
+            commit_subject="chore(submodule): update metadata"
+          elif ((${#changed_submodules[@]} == 1)); then
+            commit_subject="chore(submodule): update ${changed_submodules[0]}"
+          elif ((${#changed_submodules[@]} <= 3)); then
+            changed_list="${changed_submodules[0]}"
+            for path in "${changed_submodules[@]:1}"; do
+              changed_list+=", ${path}"
+            done
+            commit_subject="chore(submodule): update ${changed_list}"
+          else
+            commit_subject="chore(submodule): update ${#changed_submodules[@]} submodules"
+          fi
+
+          {
+            printf '%s\n\n' "${commit_subject}"
+            echo "Updated submodules:"
+            if ((${#changed_submodules[@]} > 0)); then
+              git diff --submodule=log -- "${changed_submodules[@]}"
+            fi
+            if ! git diff --quiet -- .gitmodules; then
+              echo
+              echo ".gitmodules metadata changed."
+            fi
+            echo
+            echo "Trigger: ${GITHUB_EVENT_NAME}"
+          } > commit-message.txt
+
           git add .gitmodules "${submodule_paths[@]}"
-          git commit \
-            -m "Update submodules" \
-            -m "Trigger: ${GITHUB_EVENT_NAME}"
+          git commit -F commit-message.txt
 
           git pull --rebase origin "${TARGET_BRANCH}"
           git push origin "HEAD:${TARGET_BRANCH}"
