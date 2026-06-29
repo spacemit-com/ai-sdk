@@ -23,6 +23,7 @@ AI SDK 关键目录速览（本仓库根目录即组件目录）：
 - **`tts/`**：语音合成 SDK（统一 API + 示例）
 - **`vad/`**：语音活动检测 SDK（统一 API + 示例）
 - **`llm/`**：大模型 SDK（OpenAI 兼容服务对接 + 示例）
+- **`vlm/`**：视觉语言模型 SDK（C++/Python HTTP 接口 + Gateway 适配）
 
 各组件对外头文件（C++ API 入口，最终以组件 README 为准）：
 
@@ -31,6 +32,7 @@ AI SDK 关键目录速览（本仓库根目录即组件目录）：
 - **TTS**：`tts/include/tts_service.h`
 - **VAD**：`vad/include/vad_service.h`
 - **LLM**：`llm/include/llm_service.h`
+- **VLM**：`vlm/include/vlm/vlm_service.h`（C++ API），`vlm/src/python/vlm.py`（Python HTTP API）
 
 ## 2. 构建编译
 
@@ -214,6 +216,115 @@ llm_chat "你好" "http://localhost:8080/v1" "qwen2.5-0.5b" "You are a helpful a
 export OPENAI_API_KEY=你的云端key
 llm_chat "你好" "https://api.deepseek.com" "deepseek-chat" "You are a helpful assistant." 256
 ```
+
+### 3.6 VLM
+
+**步骤 1：安装依赖并下载模型**
+
+```bash
+sudo apt-get update
+sudo apt-get install -y build-essential cmake curl libyaml-cpp-dev nlohmann-json3-dev
+sudo apt install llama.cpp-tools-spacemit
+
+cd vlm
+bash scripts/download_model.sh fastvlm-mm-0.5b-q4_1
+```
+
+可用模型列表（均通过 `--vision-backend smt` + ONNX vision 验证）：
+
+| 模型 ID | 参数量 | 磁盘大小 | 推理速度 |
+|---------|-------|---------|---------|
+| `fastvlm-mm-0.5b-q4_1` | 0.5B | ~766M | ~58 tok/s |
+| `Qwen3.5-0.8B` | 0.8B | ~932M | ~40 tok/s |
+| `Qwen3.5-2B` | 2B | ~2.6G | ~26 tok/s |
+| `Qwen3.5-4B` | 4B | ~3.9G | ~13 tok/s |
+| `qwen30ba3b-mm-q4_1` | 30B (MoE) | ~17.6G | ~18 tok/s |
+
+模型默认下载到 `~/.cache/models/vlm/<model_name>/`，也可以通过 `VLM_CACHE_DIR=/data/models` 指定目录。
+
+**步骤 2：编译 VLM SDK**
+
+```bash
+cd vlm
+mkdir -p build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+cmake --build . -j$(nproc)
+ctest --output-on-failure
+```
+
+**步骤 3：运行 C++ 示例**
+
+```bash
+cd vlm/build
+./fastvlm_demo \
+  --config ../examples/fastvlm/config/fastvlm.yaml \
+  --image /path/to/image.jpg \
+  --prompt "用一句话描述这张图片"
+```
+
+**步骤 4：运行 Python 示例**
+
+Python 接口为纯 HTTP 客户端，通过 OpenAI 兼容 API 与 llama-server 通信，无需 C ABI 依赖：
+
+```bash
+cd vlm
+PYTHONPATH=$PWD/src/python:$PYTHONPATH \
+  python3 examples/fastvlm/python/vlm_demo.py \
+  --config examples/fastvlm/config/fastvlm.yaml \
+  --image /path/to/image.jpg \
+  --prompt "Describe this image"
+```
+
+**步骤 5：通过 Gateway 调用**
+
+Gateway 已接入 VLM domain，支持本地 llama-server 模式和远程代理模式。接口路径为 `/v1/vlm/*`，提供 OpenAI 兼容的 `/v1/chat/completions` 路由。
+
+启动 Gateway：
+
+```bash
+cd gateway
+PYTHONPATH=src python3 -m uvicorn spacemit_ai_gateway.app.main:app \
+  --host 0.0.0.0 --port 18790
+```
+
+注册并加载模型（使用 `local_path` 指向模型目录）：
+
+```bash
+# 注册模型
+curl -X POST http://127.0.0.1:18790/v1/vlm/models/register \
+  -H 'Content-Type: application/json' \
+  -d '{"model":"fastvlm-mm-0.5b-q4_1","source_type":"local_path","local_path":"~/.cache/models/vlm/fastvlm-mm-0.5b-q4_1"}'
+
+# 加载模型
+curl -X POST http://127.0.0.1:18790/v1/vlm/models/load \
+  -H 'Content-Type: application/json' \
+  -d '{"model":"fastvlm-mm-0.5b-q4_1"}'
+```
+
+推理调用（文本）：
+
+```bash
+curl -X POST http://127.0.0.1:18790/v1/vlm/chat/completions \
+  -H 'Content-Type: application/json' \
+  -d '{"model":"fastvlm-mm-0.5b-q4_1","messages":[{"role":"user","content":"What is 2+2?"}],"max_tokens":50}'
+```
+
+推理调用（图像理解）：
+
+```bash
+curl -X POST http://127.0.0.1:18790/v1/vlm/chat/completions \
+  -H 'Content-Type: application/json' \
+  -d '{"model":"fastvlm-mm-0.5b-q4_1","messages":[{"role":"user","content":"Describe this image","image_path":"/path/to/image.jpg"}]}'
+```
+
+卸载模型：
+
+```bash
+curl -X POST http://127.0.0.1:18790/v1/vlm/models/unload \
+  -H 'Content-Type: application/json' \
+  -d '{"model":"fastvlm-mm-0.5b-q4_1"}'
+```
+
 
 ## 4. 文档
 
