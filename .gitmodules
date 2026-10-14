@@ -38,3 +38,7 @@
 	path = rl
 	url = https://github.com/spacemit-com/model_zoo_rl
 	branch = main
+[submodule "kws"]
+	path = kws
+	url = https://github.com/spacemit-com/model-zoo-kws.git
+	branch = main
