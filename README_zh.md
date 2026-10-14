@@ -4,6 +4,8 @@
 
 SpacemiT AI SDK 是面向进迭时空 K 系列芯片适配的 AI 能力集合仓库。本仓库以 **Git Submodule** 的方式组织各组件代码，便于按需拉取、独立演进与集成。
 
+![SpacemiT AI SDK 架构图](docs/images/architecture-zh.png)
+
 ## 1. 项目简介
 
 本仓库包含（以子仓库形式）：
@@ -13,6 +15,7 @@ SpacemiT AI SDK 是面向进迭时空 K 系列芯片适配的 AI 能力集合仓
   - **`vad/`**：语音活动检测（VAD）
   - **`asr/`**：语音识别（ASR）
   - **`tts/`**：语音合成（TTS）
+  - **`kws/`**：关键词唤醒（KWS）
 - **自然语言（`llm/`）**：对接 OpenAI 兼容服务（如 `llama-server`），提供 `llm_chat` 等示例便于快速体验与集成
 - **多模态（`vlm/`）**：视觉语言模型相关能力
 
@@ -24,6 +27,7 @@ AI SDK 关键目录速览（本仓库根目录即组件目录）：
 - **`asr/`**：语音识别 SDK（统一 API + 示例）
 - **`tts/`**：语音合成 SDK（统一 API + 示例）
 - **`vad/`**：语音活动检测 SDK（统一 API + 示例）
+- **`kws/`**：关键词唤醒 SDK（统一 API + 示例）
 - **`llm/`**：大模型 SDK（OpenAI 兼容服务对接 + 示例）
 - **`vlm/`**：视觉语言模型 SDK（C++/Python HTTP 接口 + Gateway 适配）
 
@@ -33,6 +37,7 @@ AI SDK 关键目录速览（本仓库根目录即组件目录）：
 - **ASR**：`asr/include/asr_service.h`
 - **TTS**：`tts/include/tts_service.h`
 - **VAD**：`vad/include/vad_service.h`
+- **KWS**：`kws/include/kws_service.h`
 - **LLM**：`llm/include/llm_service.h`
 - **VLM**：`vlm/include/vlm/vlm_service.h`（C++ API），`vlm/src/python/vlm.py`（Python HTTP API）
 

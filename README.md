@@ -4,6 +4,8 @@ English | [简体中文](README_zh.md)
 
 SpacemiT AI SDK brings together AI components adapted for SpacemiT K-series processors. This repository organizes the components as **Git submodules**, so they can be fetched as needed, developed independently, and integrated into applications.
 
+![SpacemiT AI SDK architecture](docs/images/architecture-en.png)
+
 ## 1. Overview
 
 This repository includes the following components as submodules:
@@ -13,6 +15,7 @@ This repository includes the following components as submodules:
   - **`vad/`**: voice activity detection (VAD)
   - **`asr/`**: automatic speech recognition (ASR)
   - **`tts/`**: text-to-speech synthesis (TTS)
+  - **`kws/`**: keyword spotting (KWS)
 - **Natural language (`llm/`)**: integration with OpenAI-compatible services such as `llama-server`, with examples such as `llm_chat` for quick evaluation and integration
 - **Multimodal (`vlm/`)**: vision-language model capabilities
 
@@ -24,6 +27,7 @@ The component directories are located at the root of this repository:
 - **`asr/`**: speech recognition SDK with a unified API and examples
 - **`tts/`**: speech synthesis SDK with a unified API and examples
 - **`vad/`**: voice activity detection SDK with a unified API and examples
+- **`kws/`**: keyword spotting SDK with a unified API and examples
 - **`llm/`**: large language model SDK with OpenAI-compatible service integration and examples
 - **`vlm/`**: vision-language model SDK with C++/Python HTTP interfaces and Gateway integration
 
@@ -33,6 +37,7 @@ Public headers and API entry points are listed below. Refer to each component's 
 - **ASR**: `asr/include/asr_service.h`
 - **TTS**: `tts/include/tts_service.h`
 - **VAD**: `vad/include/vad_service.h`
+- **KWS**: `kws/include/kws_service.h`
 - **LLM**: `llm/include/llm_service.h`
 - **VLM**: `vlm/include/vlm/vlm_service.h` (C++ API), `vlm/src/python/vlm.py` (Python HTTP API)
 
