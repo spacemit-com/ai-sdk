@@ -1,148 +1,151 @@
 # SpacemiT AI SDK
 
-SpacemiT AI SDK 是面向进迭时空 K 系列芯片适配的 AI 能力集合仓库。本仓库以 **Git Submodule** 的方式组织各组件代码，便于按需拉取、独立演进与集成。
+English | [简体中文](README_zh.md)
 
-## 1. 项目简介
+SpacemiT AI SDK brings together AI components adapted for SpacemiT K-series processors. This repository organizes the components as **Git submodules**, so they can be fetched as needed, developed independently, and integrated into applications.
 
-本仓库包含（以子仓库形式）：
+## 1. Overview
 
-- **计算机视觉（`vision/`）**：检测/分类/分割/跟踪/人脸/姿态等，提供 C++/Python 统一接口与丰富示例
-- **语音**：
-  - **`vad/`**：语音活动检测（VAD）
-  - **`asr/`**：语音识别（ASR）
-  - **`tts/`**：语音合成（TTS）
-- **自然语言（`llm/`）**：对接 OpenAI 兼容服务（如 `llama-server`），提供 `llm_chat` 等示例便于快速体验与集成
-- **多模态（`vlm/`）**：视觉语言模型相关能力
+This repository includes the following components as submodules:
 
-> 说明：各组件示例请直接参考对应子仓库目录中的 `examples/` 与 README。
+- **Computer vision (`vision/`)**: detection, classification, segmentation, tracking, face recognition, pose estimation, and more, with unified C++/Python interfaces and extensive examples
+- **Speech**:
+  - **`vad/`**: voice activity detection (VAD)
+  - **`asr/`**: automatic speech recognition (ASR)
+  - **`tts/`**: text-to-speech synthesis (TTS)
+- **Natural language (`llm/`)**: integration with OpenAI-compatible services such as `llama-server`, with examples such as `llm_chat` for quick evaluation and integration
+- **Multimodal (`vlm/`)**: vision-language model capabilities
 
-AI SDK 关键目录速览（本仓库根目录即组件目录）：
+> Note: See the `examples/` directory and README in each component's repository for component-specific examples.
 
-- **`vision/`**：计算机视觉 SDK + `examples/`
-- **`asr/`**：语音识别 SDK（统一 API + 示例）
-- **`tts/`**：语音合成 SDK（统一 API + 示例）
-- **`vad/`**：语音活动检测 SDK（统一 API + 示例）
-- **`llm/`**：大模型 SDK（OpenAI 兼容服务对接 + 示例）
-- **`vlm/`**：视觉语言模型 SDK（C++/Python HTTP 接口 + Gateway 适配）
+The component directories are located at the root of this repository:
 
-各组件对外头文件（C++ API 入口，最终以组件 README 为准）：
+- **`vision/`**: computer vision SDK and `examples/`
+- **`asr/`**: speech recognition SDK with a unified API and examples
+- **`tts/`**: speech synthesis SDK with a unified API and examples
+- **`vad/`**: voice activity detection SDK with a unified API and examples
+- **`llm/`**: large language model SDK with OpenAI-compatible service integration and examples
+- **`vlm/`**: vision-language model SDK with C++/Python HTTP interfaces and Gateway integration
 
-- **Vision**：`vision/include/vision_service.h`
-- **ASR**：`asr/include/asr_service.h`
-- **TTS**：`tts/include/tts_service.h`
-- **VAD**：`vad/include/vad_service.h`
-- **LLM**：`llm/include/llm_service.h`
-- **VLM**：`vlm/include/vlm/vlm_service.h`（C++ API），`vlm/src/python/vlm.py`（Python HTTP API）
+Public headers and API entry points are listed below. Refer to each component's README for authoritative details:
 
-## 2. 构建编译
+- **Vision**: `vision/include/vision_service.h`
+- **ASR**: `asr/include/asr_service.h`
+- **TTS**: `tts/include/tts_service.h`
+- **VAD**: `vad/include/vad_service.h`
+- **LLM**: `llm/include/llm_service.h`
+- **VLM**: `vlm/include/vlm/vlm_service.h` (C++ API), `vlm/src/python/vlm.py` (Python HTTP API)
 
-### 2.1 获取代码
+## 2. Building
 
-本仓库使用 Git Submodule 管理各组件源码，推荐递归拉取：
+### 2.1 Get the Source Code
+
+This repository uses Git submodules to manage component source code. A recursive clone is recommended:
 
 ```bash
 git clone --recurse-submodules https://github.com/spacemit-com/ai-sdk.git
-# 或 SSH
+# Or use SSH:
 #git clone --recurse-submodules git@github.com:spacemit-com/ai-sdk.git
 ```
 
-如果你已经 clone 了主仓库但没拉子仓库：
+If you have already cloned the main repository without its submodules:
 
 ```bash
 cd ai-sdk
 git submodule update --init --recursive
 ```
 
-### 2.2 一键编译
+### 2.2 Build All Components
 
-本仓库以 submodule 方式聚合各组件源码；
+The top-level repository brings together the component sources as submodules:
 
 ```bash
-# source环境变量
+# Set up the build environment
 source build/envsetup.sh
 
-# 一键编译应用
-# 第一次编译时间会长一点，编译会自动安装各组件依赖，请耐心等待
+# Build all components
+# The first build may take longer because component dependencies are installed automatically.
 m
 ```
 
-如果你只想在 SDK 中**单独编译某个组件**，可以进入对应目录执行 `mm`（同样需要先 `source build/envsetup.sh`）：
+To **build a single component**, enter its directory and run `mm`. You must first run `source build/envsetup.sh`:
 
 ```bash
 source build/envsetup.sh
 
 cd asr && mm
-# 或
+# Or:
 cd vision && mm
 cd tts && mm
 cd vad && mm
 cd llm && mm
 ```
-构建产物通常会安装到 `output/staging`（以 SDK 工程为准）。
 
+Build artifacts are typically installed to `output/staging`; refer to the SDK build configuration for the exact location.
 
-## 3. 示例运行
+## 3. Running Examples
 
-> 说明：示例下载的模型/资源会缓存到用户目录（以组件 README 为准），常见默认目录为 `~/.cache/models/` 与 `~/.cache/assets/`。
+> Note: Models and assets downloaded by the examples are cached under the user's home directory. Common defaults are `~/.cache/models/` and `~/.cache/assets/`; see each component's README for details.
 
 ### 3.1 Vision
 
-**步骤 1：下载模型**
+**Step 1: Download models**
 
 ```bash
-# 下载所有 vision 示例模型（会放到 ~/.cache/models/vision/ 下面）
+# Download all Vision example models to ~/.cache/models/vision/
 bash vision/scripts/download_all_models.sh
 ```
 
-**步骤 2：下载资源文件（图片/视频）**
+**Step 2: Download assets (images and videos)**
 
 ```bash
-# 下载示例用图片/视频资源（会放到 ~/.cache/assets/ 下面）
+# Download example images and videos to ~/.cache/assets/
 bash vision/scripts/download_assets.sh
 ```
 
-默认目录：
+Default directories:
 
-- 模型：`~/.cache/models/vision/`
-- 资源：`~/.cache/assets/`
+- Models: `~/.cache/models/vision/`
+- Assets: `~/.cache/assets/`
 
-**步骤 3：运行示例**
+**Step 3: Run examples**
 
-以下为 `vision/examples/` 下常见示例的运行命令（以实际安装到 PATH 的可执行文件/脚本为准；更多参数请参考对应示例目录 README）：
+The following commands run common examples from `vision/examples/`. The executable names depend on what is installed on your `PATH`. See the README in each example directory for additional options.
 
 ```bash
-# 人脸识别（相似度）
+# Face recognition (similarity)
 arcface vision/examples/arcface/config/arcface.yaml
 
-# 人脸检测
+# Face detection
 yolov5-face vision/examples/yolov5-face/config/yolov5-face.yaml
 
-# 手势检测
+# Gesture detection
 yolov5_gesture vision/examples/yolov5_gesture/config/yolov5_gesture.yaml
 
-# 目标检测
+# Object detection
 yolov8 vision/examples/yolov8/config/yolov8.yaml
 yolov11 vision/examples/yolov11/config/yolov11.yaml
 
-# 姿态估计
+# Pose estimation
 yolov8_pose vision/examples/yolov8_pose/config/yolov8_pose.yaml
 
-# 实例分割
+# Instance segmentation
 yolov8_seg vision/examples/yolov8_seg/config/yolov8_seg.yaml
 
-# 图像分类 / 情绪识别
+# Image classification / emotion recognition
 resnet vision/examples/resnet/config/resnet50.yaml
 emotion vision/examples/emotion/config/emotion.yaml
 
-# 多目标跟踪（视频/摄像头）
-# 以下两个示例是实时画面显示目标跟踪，需要接上屏幕，否则会报错
+# Multi-object tracking (video/camera)
+# These two examples display tracking results in real time and require a connected display.
+# They will fail if no display is connected.
 bytetrack vision/examples/bytetrack/config/bytetrack.yaml
 ocsort vision/examples/ocsort/config/ocsort.yaml
 ```
 
 ### 3.2 ASR
 
-**步骤 1：下载音频资源（示例音频）**
+**Step 1: Download sample audio**
 
 ```bash
 mkdir -p ~/.cache/models/assets/audio
@@ -150,47 +153,47 @@ cd ~/.cache/models/assets/audio
 wget https://archive.spacemit.com/spacemit-ai/model_zoo/assets/audio/001_zh_daily_weather.wav
 ```
 
-更多音频资源可在 [音频资源目录](https://archive.spacemit.com/spacemit-ai/model_zoo/assets/audio) 按需下载。
+Additional samples are available in the [audio assets directory](https://archive.spacemit.com/spacemit-ai/model_zoo/assets/audio).
 
-**步骤 2：运行示例**
+**Step 2: Run examples**
 
 ```bash
-# 识别 wav 文件（示例）
+# Transcribe a WAV file
 asr_file_demo ~/.cache/models/assets/audio/001_zh_daily_weather.wav
 
-# 流式识别(示例，需要外接音频输入设备)
-asr_stream_demo -l # 查看音频设备号
-asr_stream_demo -i 0 -t 5 # 其中 -i 为输入音频设备号
+# Streaming recognition (requires an external audio input device)
+asr_stream_demo -l # List audio device IDs
+asr_stream_demo -i 0 -t 5 # -i specifies the input audio device ID
 ```
 
 ### 3.3 TTS
 
-**运行示例**
+**Run examples**
 
 ```bash
-# 简单合成（默认参数）
+# Synthesize speech with default parameters
 tts_file_demo
 
-# 指定文本与后端（示例）
+# Specify the text and backend (Chinese text for the Chinese backend)
 tts_file_demo -p "你好世界" -l matcha:zh
 
-# 流式合成（示例，需要外接音频输出设备）
-tts_stream_demo -l # 查看音频设备号
-tts_stream_demo -o 0 --output 48000 --channels 2 -e matcha:zh-en # -o 为音频输出设备号
+# Streaming synthesis (requires an external audio output device)
+tts_stream_demo -l # List audio device IDs
+tts_stream_demo -o 0 --output 48000 --channels 2 -e matcha:zh-en # -o specifies the output audio device ID
 ```
 
 ### 3.4 VAD
 
-**运行示例**
+**Run the example**
 
 ```bash
-# 内置模拟音频测试
+# Test with built-in simulated audio
 vad_simple_demo
 ```
 
 ### 3.5 LLM
 
-**步骤 1：下载模型（GGUF 示例）**
+**Step 1: Download a model (GGUF example)**
 
 ```bash
 mkdir -p ~/.cache/models/llm
@@ -198,28 +201,28 @@ cd ~/.cache/models/llm
 wget https://archive.spacemit.com/spacemit-ai/model_zoo/llm/qwen2.5-0.5b-instruct-q4_0.gguf
 ```
 
-如需体验更多模型，可查看 [LLM 模型目录](https://archive.spacemit.com/spacemit-ai/model_zoo/llm) 按需下载。
+To try other models, browse the [LLM model directory](https://archive.spacemit.com/spacemit-ai/model_zoo/llm).
 
-**步骤 2：启动 OpenAI 兼容服务并调用示例**
+**Step 2: Start an OpenAI-compatible service and run the example**
 
 ```bash
-# 启动服务（8080）
+# Start the server on port 8080
 llama-server -m ~/.cache/models/llm/qwen2.5-0.5b-instruct-q4_0.gguf -t 8 --port 8080 &
 
-# 调用 SDK 示例程序
-llm_chat "你好" "http://localhost:8080/v1" "qwen2.5-0.5b" "You are a helpful assistant." 256
+# Run the SDK example
+llm_chat "Hello" "http://localhost:8080/v1" "qwen2.5-0.5b" "You are a helpful assistant." 256
 ```
 
-若使用云端/远端 OpenAI 兼容服务，只需将第 2 个参数替换为云端的 `api_base`，并通过环境变量传入 API Key，例如：
+For a cloud or remote OpenAI-compatible service, replace the second argument with the service's `api_base` and provide the API key through an environment variable:
 
 ```bash
-export OPENAI_API_KEY=你的云端key
-llm_chat "你好" "https://api.deepseek.com" "deepseek-chat" "You are a helpful assistant." 256
+export OPENAI_API_KEY=your_api_key
+llm_chat "Hello" "https://api.deepseek.com" "deepseek-chat" "You are a helpful assistant." 256
 ```
 
 ### 3.6 VLM
 
-**步骤 1：安装依赖并下载模型**
+**Step 1: Install dependencies and download a model**
 
 ```bash
 sudo apt-get update
@@ -230,19 +233,19 @@ cd vlm
 bash scripts/download_model.sh fastvlm-mm-0.5b-q4_1
 ```
 
-可用模型列表（均通过 `--vision-backend smt` + ONNX vision 验证）：
+Available models (validated with `--vision-backend smt` and ONNX vision models):
 
-| 模型 ID | 参数量 | 磁盘大小 | 推理速度 |
-|---------|-------|---------|---------|
+| Model ID | Parameters | Disk Size | Inference Speed |
+|----------|------------|-----------|-----------------|
 | `fastvlm-mm-0.5b-q4_1` | 0.5B | ~766M | ~58 tok/s |
 | `Qwen3.5-0.8B` | 0.8B | ~932M | ~40 tok/s |
 | `Qwen3.5-2B` | 2B | ~2.6G | ~26 tok/s |
 | `Qwen3.5-4B` | 4B | ~3.9G | ~13 tok/s |
 | `qwen30ba3b-mm-q4_1` | 30B (MoE) | ~17.6G | ~18 tok/s |
 
-模型默认下载到 `~/.cache/models/vlm/<model_name>/`，也可以通过 `VLM_CACHE_DIR=/data/models` 指定目录。
+Models are downloaded to `~/.cache/models/vlm/<model_name>/` by default. Set `VLM_CACHE_DIR=/data/models` to use a different directory.
 
-**步骤 2：编译 VLM SDK**
+**Step 2: Build the VLM SDK**
 
 ```bash
 cd vlm
@@ -252,19 +255,19 @@ cmake --build . -j$(nproc)
 ctest --output-on-failure
 ```
 
-**步骤 3：运行 C++ 示例**
+**Step 3: Run the C++ example**
 
 ```bash
 cd vlm/build
 ./fastvlm_demo \
   --config ../examples/fastvlm/config/fastvlm.yaml \
   --image /path/to/image.jpg \
-  --prompt "用一句话描述这张图片"
+  --prompt "Describe this image in one sentence"
 ```
 
-**步骤 4：运行 Python 示例**
+**Step 4: Run the Python example**
 
-Python 接口为纯 HTTP 客户端，通过 OpenAI 兼容 API 与 llama-server 通信，无需 C ABI 依赖：
+The Python interface is a pure HTTP client that communicates with `llama-server` through an OpenAI-compatible API. It does not require a C ABI dependency.
 
 ```bash
 cd vlm
@@ -275,11 +278,11 @@ PYTHONPATH=$PWD/src/python:$PYTHONPATH \
   --prompt "Describe this image"
 ```
 
-**步骤 5：通过 Gateway 调用**
+**Step 5: Use the Gateway**
 
-Gateway 已接入 VLM domain，支持本地 llama-server 模式和远程代理模式。接口路径为 `/v1/vlm/*`，提供 OpenAI 兼容的 `/v1/chat/completions` 路由。
+The Gateway includes a VLM domain that supports both local `llama-server` instances and remote proxy mode. Its endpoints are under `/v1/vlm/*`, including an OpenAI-compatible `/v1/chat/completions` route.
 
-启动 Gateway：
+Start the Gateway:
 
 ```bash
 cd gateway
@@ -287,21 +290,21 @@ PYTHONPATH=src python3 -m uvicorn spacemit_ai_gateway.app.main:app \
   --host 0.0.0.0 --port 18790
 ```
 
-注册并加载模型（使用 `local_path` 指向模型目录）：
+Register and load a model, using `local_path` to specify its directory:
 
 ```bash
-# 注册模型
+# Register the model
 curl -X POST http://127.0.0.1:18790/v1/vlm/models/register \
   -H 'Content-Type: application/json' \
   -d '{"model":"fastvlm-mm-0.5b-q4_1","source_type":"local_path","local_path":"~/.cache/models/vlm/fastvlm-mm-0.5b-q4_1"}'
 
-# 加载模型
+# Load the model
 curl -X POST http://127.0.0.1:18790/v1/vlm/models/load \
   -H 'Content-Type: application/json' \
   -d '{"model":"fastvlm-mm-0.5b-q4_1"}'
 ```
 
-推理调用（文本）：
+Run text inference:
 
 ```bash
 curl -X POST http://127.0.0.1:18790/v1/vlm/chat/completions \
@@ -309,7 +312,7 @@ curl -X POST http://127.0.0.1:18790/v1/vlm/chat/completions \
   -d '{"model":"fastvlm-mm-0.5b-q4_1","messages":[{"role":"user","content":"What is 2+2?"}],"max_tokens":50}'
 ```
 
-推理调用（图像理解）：
+Run image understanding:
 
 ```bash
 curl -X POST http://127.0.0.1:18790/v1/vlm/chat/completions \
@@ -317,7 +320,7 @@ curl -X POST http://127.0.0.1:18790/v1/vlm/chat/completions \
   -d '{"model":"fastvlm-mm-0.5b-q4_1","messages":[{"role":"user","content":"Describe this image","image_path":"/path/to/image.jpg"}]}'
 ```
 
-卸载模型：
+Unload the model:
 
 ```bash
 curl -X POST http://127.0.0.1:18790/v1/vlm/models/unload \
@@ -325,7 +328,6 @@ curl -X POST http://127.0.0.1:18790/v1/vlm/models/unload \
   -d '{"model":"fastvlm-mm-0.5b-q4_1"}'
 ```
 
+## 4. Documentation
 
-## 4. 文档
-
-更多使用说明请参看 [SpacemiT AI SDK 文档](https://www.spacemit.com/community/document/info?lang=zh&nodepath=ai/application_tools/ai-sdk.md)。
+For more information, see the [SpacemiT AI SDK documentation (Chinese)](https://www.spacemit.com/community/document/info?lang=zh&nodepath=ai/application_tools/ai-sdk.md).
