@@ -60,7 +60,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          submodule_paths=(asr build gateway llm rl tts vad vision vlm voiceprint)
+          submodule_paths=(asr avatar build gateway llm rl tts vad vision vlm voiceprint)
 
           if git diff --quiet -- .gitmodules "${submodule_paths[@]}"; then
             echo "No submodule pointer changes."

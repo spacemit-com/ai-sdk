@@ -18,6 +18,7 @@ SpacemiT AI SDK 是面向进迭时空 K 系列芯片适配的 AI 能力集合仓
   - **`kws/`**：关键词唤醒（KWS）
 - **自然语言（`llm/`）**：对接 OpenAI 兼容服务（如 `llama-server`），提供 `llm_chat` 等示例便于快速体验与集成
 - **多模态（`vlm/`）**：视觉语言模型相关能力
+- **数字人（`avatar/`）**：bianbu-avatar 音频驱动口型（FeatherHuBERT + 人物 UNet），离线生成说话画面
 
 > 说明：各组件示例请直接参考对应子仓库目录中的 `examples/` 与 README。
 
@@ -30,6 +31,7 @@ AI SDK 关键目录速览（本仓库根目录即组件目录）：
 - **`kws/`**：关键词唤醒 SDK（统一 API + 示例）
 - **`llm/`**：大模型 SDK（OpenAI 兼容服务对接 + 示例）
 - **`vlm/`**：视觉语言模型 SDK（C++/Python HTTP 接口 + Gateway 适配）
+- **`avatar/`**：数字人口型 SDK（C++/Python 接口 + 离线渲染示例）
 
 各组件对外头文件（C++ API 入口，最终以组件 README 为准）：
 
@@ -40,6 +42,7 @@ AI SDK 关键目录速览（本仓库根目录即组件目录）：
 - **KWS**：`kws/include/kws_service.h`
 - **LLM**：`llm/include/llm_service.h`
 - **VLM**：`vlm/include/vlm/vlm_service.h`（C++ API），`vlm/src/python/vlm.py`（Python HTTP API）
+- **Avatar**：`avatar/include/avatar_service.h`
 
 ## 2. 构建编译
 
@@ -84,6 +87,7 @@ cd vision && mm
 cd tts && mm
 cd vad && mm
 cd llm && mm
+cd avatar && mm
 ```
 构建产物通常会安装到 `output/staging`（以 SDK 工程为准）。
 
@@ -332,6 +336,32 @@ curl -X POST http://127.0.0.1:18790/v1/vlm/models/unload \
   -d '{"model":"fastvlm-mm-0.5b-q4_1"}'
 ```
 
+
+### 3.7 Avatar
+
+**步骤 1：下载模型、人物素材和测试音频**
+
+```bash
+cd avatar
+bash scripts/download_models.sh --persona feifan
+bash scripts/download_assets.sh --persona feifan --frames 0
+```
+
+资源放在 `~/.cache/models/avatar/` 与 `~/.cache/assets/avatar/`。另一人物把 `feifan` 换成 `zihan`，并使用 `configs/zihan.cpu.yaml` 与 `zihan_test.wav`。
+
+**步骤 2：生成口型视频**
+
+```bash
+# 先编译 avatar（cd avatar && mm），avatar_worker 安装在 output/staging/bin
+export PATH="$PWD/../output/staging/bin:$PATH"
+bash examples/cpp/run_pipeline.sh configs/cpu.yaml \
+  ~/.cache/assets/avatar/audio/feifan_test.wav output/feifan-frames
+ffmpeg -framerate 25 -i output/feifan-frames/%08d.png \
+  -i ~/.cache/assets/avatar/audio/feifan_test.wav \
+  -c:v libx264 -pix_fmt yuv420p -c:a aac -shortest output/feifan.mp4
+```
+
+K3 上使用 SpaceMIT EP、Python 接口和配置参数见 [avatar/README.md](avatar/README.md)。
 
 ## 4. 文档
 
