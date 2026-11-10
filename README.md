@@ -352,8 +352,7 @@ Resources are stored in `~/.cache/models/avatar/` and `~/.cache/assets/avatar/`.
 **Step 2: Render a lip-sync video**
 
 ```bash
-# Build avatar first (cd avatar && mm); avatar_worker is installed in output/staging/bin
-export PATH="$PWD/../output/staging/bin:$PATH"
+# Run source build/envsetup.sh in the SDK root and build avatar first (cd avatar && mm); avatar_worker is then on PATH
 bash examples/cpp/run_pipeline.sh configs/feifan.yaml \
   ~/.cache/assets/avatar/audio/feifan_test.wav output/feifan-frames
 ffmpeg -framerate 25 -i output/feifan-frames/%08d.png \

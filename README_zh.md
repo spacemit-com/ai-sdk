@@ -352,8 +352,7 @@ bash scripts/download_assets.sh --persona feifan --frames 0
 **步骤 2：生成口型视频**
 
 ```bash
-# 先编译 avatar（cd avatar && mm），avatar_worker 安装在 output/staging/bin
-export PATH="$PWD/../output/staging/bin:$PATH"
+# 先在 SDK 根目录执行 source build/envsetup.sh 并编译 avatar（cd avatar && mm），avatar_worker 即在 PATH 中
 bash examples/cpp/run_pipeline.sh configs/feifan.yaml \
   ~/.cache/assets/avatar/audio/feifan_test.wav output/feifan-frames
 ffmpeg -framerate 25 -i output/feifan-frames/%08d.png \
