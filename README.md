@@ -343,8 +343,8 @@ curl -X POST http://127.0.0.1:18790/v1/vlm/models/unload \
 
 ```bash
 cd avatar
-bash scripts/download_models.sh --persona feifan
-bash scripts/download_assets.sh --persona feifan --frames 0
+./scripts/download_models.sh --persona feifan
+./scripts/download_assets.sh --persona feifan --frames 0
 ```
 
 Resources are stored in `~/.cache/models/avatar/` and `~/.cache/assets/avatar/`. For the other persona, replace `feifan` with `zihan` and use `configs/zihan.yaml` with `zihan_test.wav`.
@@ -353,7 +353,7 @@ Resources are stored in `~/.cache/models/avatar/` and `~/.cache/assets/avatar/`.
 
 ```bash
 # Run source build/envsetup.sh in the SDK root and build avatar first (cd avatar && mm); avatar_worker is then on PATH
-bash examples/cpp/run_pipeline.sh configs/feifan.yaml \
+./examples/cpp/run_pipeline.sh configs/feifan.yaml \
   ~/.cache/assets/avatar/audio/feifan_test.wav output/feifan-frames
 ffmpeg -framerate 25 -i output/feifan-frames/%08d.png \
   -i ~/.cache/assets/avatar/audio/feifan_test.wav \

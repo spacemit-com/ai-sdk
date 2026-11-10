@@ -343,8 +343,8 @@ curl -X POST http://127.0.0.1:18790/v1/vlm/models/unload \
 
 ```bash
 cd avatar
-bash scripts/download_models.sh --persona feifan
-bash scripts/download_assets.sh --persona feifan --frames 0
+./scripts/download_models.sh --persona feifan
+./scripts/download_assets.sh --persona feifan --frames 0
 ```
 
 资源放在 `~/.cache/models/avatar/` 与 `~/.cache/assets/avatar/`。另一人物把 `feifan` 换成 `zihan`，并使用 `configs/zihan.yaml` 与 `zihan_test.wav`。
@@ -353,7 +353,7 @@ bash scripts/download_assets.sh --persona feifan --frames 0
 
 ```bash
 # 先在 SDK 根目录执行 source build/envsetup.sh 并编译 avatar（cd avatar && mm），avatar_worker 即在 PATH 中
-bash examples/cpp/run_pipeline.sh configs/feifan.yaml \
+./examples/cpp/run_pipeline.sh configs/feifan.yaml \
   ~/.cache/assets/avatar/audio/feifan_test.wav output/feifan-frames
 ffmpeg -framerate 25 -i output/feifan-frames/%08d.png \
   -i ~/.cache/assets/avatar/audio/feifan_test.wav \
