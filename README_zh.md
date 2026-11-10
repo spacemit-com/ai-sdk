@@ -347,22 +347,18 @@ cd avatar
 ./scripts/download_assets.sh --persona feifan --frames 0
 ```
 
-资源放在 `~/.cache/models/avatar/` 与 `~/.cache/assets/avatar/`。另一人物把 `feifan` 换成 `zihan`，并使用 `configs/zihan.yaml` 与 `zihan_test.wav`。
+资源放在 `~/.cache/models/avatar/` 与 `~/.cache/assets/avatar/`。另一人物把 `feifan` 换成 `zihan`。
 
 **步骤 2：生成口型视频**
 
 ```bash
-# 先在 SDK 根目录执行 source build/envsetup.sh 并编译 avatar（cd avatar && mm），avatar_worker 即在 PATH 中
-avatar_worker extract --config configs/feifan.yaml \
-  --audio ~/.cache/assets/avatar/audio/feifan_test.wav --output feifan.ftf
-avatar_worker render --config configs/feifan.yaml --features feifan.ftf --output feifan-frames
-ffmpeg -framerate 25 -i feifan-frames/%08d.png -i ~/.cache/assets/avatar/audio/feifan_test.wav \
-  -c:v libx264 -pix_fmt yuv420p -c:a aac -shortest feifan.mp4
+# 先在 SDK 根目录执行 source build/envsetup.sh 并编译 avatar（cd avatar && mm）
+avatar_file_demo --persona feifan
 ```
 
-逐帧调用 C++ API 的简单示例：`avatar_file_demo --persona feifan --output feifan-demo`。
+帧保存在 `avatar/output/feifan-frames/`，带音频的视频为 `avatar/output/feifan.mp4`（需已安装 ffmpeg）。
 
-核分配、Python 接口和配置参数见 [avatar/README.md](avatar/README.md)。
+Python 示例、命令行工具 `avatar_worker` 和配置参数见 [avatar/README.md](avatar/README.md)。
 
 ## 4. 文档
 
