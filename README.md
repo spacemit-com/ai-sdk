@@ -353,12 +353,14 @@ Resources are stored in `~/.cache/models/avatar/` and `~/.cache/assets/avatar/`.
 
 ```bash
 # Run source build/envsetup.sh in the SDK root and build avatar first (cd avatar && mm); avatar_worker is then on PATH
-./examples/cpp/run_pipeline.sh configs/feifan.yaml \
-  ~/.cache/assets/avatar/audio/feifan_test.wav output/feifan-frames
-ffmpeg -framerate 25 -i output/feifan-frames/%08d.png \
-  -i ~/.cache/assets/avatar/audio/feifan_test.wav \
-  -c:v libx264 -pix_fmt yuv420p -c:a aac -shortest output/feifan.mp4
+avatar_worker extract --config configs/feifan.yaml \
+  --audio ~/.cache/assets/avatar/audio/feifan_test.wav --output feifan.ftf
+avatar_worker render --config configs/feifan.yaml --features feifan.ftf --output feifan-frames
+ffmpeg -framerate 25 -i feifan-frames/%08d.png -i ~/.cache/assets/avatar/audio/feifan_test.wav \
+  -c:v libx264 -pix_fmt yuv420p -c:a aac -shortest feifan.mp4
 ```
+
+A simple frame-by-frame C++ API example: `avatar_file_demo --persona feifan --output feifan-demo`.
 
 For core allocation, the Python API, and configuration options, see [avatar/README.md](avatar/README.md).
 

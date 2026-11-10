@@ -353,12 +353,14 @@ cd avatar
 
 ```bash
 # 先在 SDK 根目录执行 source build/envsetup.sh 并编译 avatar（cd avatar && mm），avatar_worker 即在 PATH 中
-./examples/cpp/run_pipeline.sh configs/feifan.yaml \
-  ~/.cache/assets/avatar/audio/feifan_test.wav output/feifan-frames
-ffmpeg -framerate 25 -i output/feifan-frames/%08d.png \
-  -i ~/.cache/assets/avatar/audio/feifan_test.wav \
-  -c:v libx264 -pix_fmt yuv420p -c:a aac -shortest output/feifan.mp4
+avatar_worker extract --config configs/feifan.yaml \
+  --audio ~/.cache/assets/avatar/audio/feifan_test.wav --output feifan.ftf
+avatar_worker render --config configs/feifan.yaml --features feifan.ftf --output feifan-frames
+ffmpeg -framerate 25 -i feifan-frames/%08d.png -i ~/.cache/assets/avatar/audio/feifan_test.wav \
+  -c:v libx264 -pix_fmt yuv420p -c:a aac -shortest feifan.mp4
 ```
+
+逐帧调用 C++ API 的简单示例：`avatar_file_demo --persona feifan --output feifan-demo`。
 
 核分配、Python 接口和配置参数见 [avatar/README.md](avatar/README.md)。
 
