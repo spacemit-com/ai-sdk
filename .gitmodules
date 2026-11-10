@@ -42,3 +42,7 @@
 	path = kws
 	url = https://github.com/spacemit-com/model-zoo-kws.git
 	branch = main
+[submodule "avatar"]
+	path = avatar
+	url = https://github.com/spacemit-com/model-zoo-avatar.git
+	branch = main

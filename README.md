@@ -18,6 +18,7 @@ This repository includes the following components as submodules:
   - **`kws/`**: keyword spotting (KWS)
 - **Natural language (`llm/`)**: integration with OpenAI-compatible services such as `llama-server`, with examples such as `llm_chat` for quick evaluation and integration
 - **Multimodal (`vlm/`)**: vision-language model capabilities
+- **Digital human (`avatar/`)**: bianbu-avatar audio-driven lip sync (FeatherHuBERT + per-persona UNet) for offline talking-head frames
 
 > Note: See the `examples/` directory and README in each component's repository for component-specific examples.
 
@@ -30,6 +31,7 @@ The component directories are located at the root of this repository:
 - **`kws/`**: keyword spotting SDK with a unified API and examples
 - **`llm/`**: large language model SDK with OpenAI-compatible service integration and examples
 - **`vlm/`**: vision-language model SDK with C++/Python HTTP interfaces and Gateway integration
+- **`avatar/`**: digital human lip-sync SDK with C++/Python interfaces and offline rendering examples
 
 Public headers and API entry points are listed below. Refer to each component's README for authoritative details:
 
@@ -40,6 +42,7 @@ Public headers and API entry points are listed below. Refer to each component's 
 - **KWS**: `kws/include/kws_service.h`
 - **LLM**: `llm/include/llm_service.h`
 - **VLM**: `vlm/include/vlm/vlm_service.h` (C++ API), `vlm/src/python/vlm.py` (Python HTTP API)
+- **Avatar**: `avatar/include/avatar_service.h`
 
 ## 2. Building
 
@@ -84,6 +87,7 @@ cd vision && mm
 cd tts && mm
 cd vad && mm
 cd llm && mm
+cd avatar && mm
 ```
 
 Build artifacts are typically installed to `output/staging`; refer to the SDK build configuration for the exact location.
@@ -332,6 +336,29 @@ curl -X POST http://127.0.0.1:18790/v1/vlm/models/unload \
   -H 'Content-Type: application/json' \
   -d '{"model":"fastvlm-mm-0.5b-q4_1"}'
 ```
+
+### 3.7 Avatar
+
+**Step 1: Download the models, persona assets, and test audio**
+
+```bash
+cd avatar
+./scripts/download_models.sh --persona feifan
+./scripts/download_assets.sh --persona feifan --frames 0
+```
+
+Resources are stored in `~/.cache/models/avatar/` and `~/.cache/assets/avatar/`. For the other persona, replace `feifan` with `zihan`.
+
+**Step 2: Render a lip-sync video**
+
+```bash
+# Run source build/envsetup.sh in the SDK root and build avatar first (cd avatar && mm)
+avatar_file_demo --persona feifan
+```
+
+Frames are saved to `avatar/output/feifan-frames/` and the video with audio to `avatar/output/feifan.mp4` (requires ffmpeg).
+
+For the Python example, the `avatar_worker` command line, and configuration options, see [avatar/README.md](avatar/README.md).
 
 ## 4. Documentation
 
