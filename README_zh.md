@@ -347,21 +347,21 @@ bash scripts/download_models.sh --persona feifan
 bash scripts/download_assets.sh --persona feifan --frames 0
 ```
 
-资源放在 `~/.cache/models/avatar/` 与 `~/.cache/assets/avatar/`。另一人物把 `feifan` 换成 `zihan`，并使用 `configs/zihan.cpu.yaml` 与 `zihan_test.wav`。
+资源放在 `~/.cache/models/avatar/` 与 `~/.cache/assets/avatar/`。另一人物把 `feifan` 换成 `zihan`，并使用 `configs/zihan.yaml` 与 `zihan_test.wav`。
 
 **步骤 2：生成口型视频**
 
 ```bash
 # 先编译 avatar（cd avatar && mm），avatar_worker 安装在 output/staging/bin
 export PATH="$PWD/../output/staging/bin:$PATH"
-bash examples/cpp/run_pipeline.sh configs/cpu.yaml \
+bash examples/cpp/run_pipeline.sh configs/feifan.yaml \
   ~/.cache/assets/avatar/audio/feifan_test.wav output/feifan-frames
 ffmpeg -framerate 25 -i output/feifan-frames/%08d.png \
   -i ~/.cache/assets/avatar/audio/feifan_test.wav \
   -c:v libx264 -pix_fmt yuv420p -c:a aac -shortest output/feifan.mp4
 ```
 
-K3 上使用 SpaceMIT EP、Python 接口和配置参数见 [avatar/README.md](avatar/README.md)。
+核分配、Python 接口和配置参数见 [avatar/README.md](avatar/README.md)。
 
 ## 4. 文档
 
