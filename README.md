@@ -19,6 +19,7 @@ This repository includes the following components as submodules:
 - **Natural language (`llm/`)**: integration with OpenAI-compatible services such as `llama-server`, with examples such as `llm_chat` for quick evaluation and integration
 - **Multimodal (`vlm/`)**: vision-language model capabilities
 - **Digital human (`avatar/`)**: bianbu-avatar audio-driven lip sync (FeatherHuBERT + per-persona UNet) for offline talking-head frames
+- **Document parsing (`file2md/`)**: converts PDF, Office documents, images, and web pages to Markdown, with layout analysis, OCR, and formula, table, and flowchart recognition
 
 > Note: See the `examples/` directory and README in each component's repository for component-specific examples.
 
@@ -32,6 +33,7 @@ The component directories are located at the root of this repository:
 - **`llm/`**: large language model SDK with OpenAI-compatible service integration and examples
 - **`vlm/`**: vision-language model SDK with C++/Python HTTP interfaces and Gateway integration
 - **`avatar/`**: digital human lip-sync SDK with C++/Python interfaces and offline rendering examples
+- **`file2md/`**: document-to-Markdown SDK with C++/Python interfaces and examples
 
 Public headers and API entry points are listed below. Refer to each component's README for authoritative details:
 
@@ -43,6 +45,7 @@ Public headers and API entry points are listed below. Refer to each component's 
 - **LLM**: `llm/include/llm_service.h`
 - **VLM**: `vlm/include/vlm/vlm_service.h` (C++ API), `vlm/src/python/vlm.py` (Python HTTP API)
 - **Avatar**: `avatar/include/avatar_service.h`
+- **File2MD**: `file2md/include/file2md_service.h`
 
 ## 2. Building
 
@@ -88,6 +91,7 @@ cd tts && mm
 cd vad && mm
 cd llm && mm
 cd avatar && mm
+cd file2md && mm
 ```
 
 Build artifacts are typically installed to `output/staging`; refer to the SDK build configuration for the exact location.
@@ -359,6 +363,32 @@ avatar_file_demo --persona feifan
 Frames are saved to `avatar/output/feifan-frames/` and the video with audio to `avatar/output/feifan.mp4` (requires ffmpeg).
 
 For the Python example, the `avatar_worker` command line, and configuration options, see [avatar/README.md](avatar/README.md).
+
+### 3.8 File2MD
+
+**Step 1: Download the models and the PDFium runtime**
+
+```bash
+cd file2md
+bash scripts/download_models.sh
+bash scripts/download_pdfium.sh
+```
+
+Models are stored in `~/.cache/models/file2md/` and PDFium in `~/.cache/file2md/thirdparty/`. PDFium is optional; without it, PDFs are rendered with Poppler.
+
+**Step 2: Convert a document to Markdown**
+
+```bash
+# Run source build/envsetup.sh in the SDK root and build file2md first (cd file2md && mm)
+file2md_demo /path/to/report.pdf --spacemit -o /tmp/file2md-output
+
+# Convert a web page and run OCR on the images in its body
+file2md_demo 'https://example.com/article' --spacemit --web-img-ocr -o /tmp/file2md-output
+```
+
+The Markdown is printed to standard output, and the Markdown file, JSON results, and extracted images are saved under `/tmp/file2md-output`. Use `--cpu` instead of `--spacemit` to run on the CPU execution provider.
+
+For supported input formats, the Python package `spacemit_file2md`, and progress callbacks, see [file2md/README.md](file2md/README.md).
 
 ## 4. Documentation
 
