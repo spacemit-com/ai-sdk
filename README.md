@@ -388,6 +388,8 @@ file2md_demo 'https://example.com/article' --spacemit --web-img-ocr -o /tmp/file
 
 The Markdown is printed to standard output, and the Markdown file, JSON results, and extracted images are saved under `/tmp/file2md-output`. Use `--cpu` instead of `--spacemit` to run on the CPU execution provider.
 
+Word and PowerPoint files require LibreOffice, XLS files require `python3-xlrd`, and JavaScript-rendered web pages require Chromium. `mm` does not install these runtime tools; install the ones you need with `sudo apt install -y libreoffice chromium python3-xlrd`.
+
 For supported input formats, the Python package `spacemit_file2md`, and progress callbacks, see [file2md/README.md](file2md/README.md).
 
 ## 4. Documentation

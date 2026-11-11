@@ -388,6 +388,8 @@ file2md_demo 'https://example.com/article' --spacemit --web-img-ocr -o /tmp/file
 
 Markdown 会输出到标准输出，Markdown 文件、JSON 结果和提取的图片保存在 `/tmp/file2md-output` 下。把 `--spacemit` 换成 `--cpu` 可改用 CPU 推理。
 
+Word 和 PowerPoint 文件需要 LibreOffice，XLS 文件需要 `python3-xlrd`，由 JavaScript 渲染的网页需要 Chromium。`mm` 不会安装这些运行时工具，请按需执行 `sudo apt install -y libreoffice chromium python3-xlrd`。
+
 支持的输入格式、Python 包 `spacemit_file2md` 和进度回调见 [file2md/README.md](file2md/README.md)。
 
 ## 4. 文档
