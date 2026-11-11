@@ -19,6 +19,7 @@ SpacemiT AI SDK 是面向进迭时空 K 系列芯片适配的 AI 能力集合仓
 - **自然语言（`llm/`）**：对接 OpenAI 兼容服务（如 `llama-server`），提供 `llm_chat` 等示例便于快速体验与集成
 - **多模态（`vlm/`）**：视觉语言模型相关能力
 - **数字人（`avatar/`）**：bianbu-avatar 音频驱动口型（FeatherHuBERT + 人物 UNet），离线生成说话画面
+- **文档解析（`file2md/`）**：将 PDF、Office 文档、图片和网页转换为 Markdown，支持版面分析、OCR 以及公式、表格、流程图识别
 
 > 说明：各组件示例请直接参考对应子仓库目录中的 `examples/` 与 README。
 
@@ -32,6 +33,7 @@ AI SDK 关键目录速览（本仓库根目录即组件目录）：
 - **`llm/`**：大模型 SDK（OpenAI 兼容服务对接 + 示例）
 - **`vlm/`**：视觉语言模型 SDK（C++/Python HTTP 接口 + Gateway 适配）
 - **`avatar/`**：数字人口型 SDK（C++/Python 接口 + 离线渲染示例）
+- **`file2md/`**：文档转 Markdown SDK（C++/Python 接口 + 示例）
 
 各组件对外头文件（C++ API 入口，最终以组件 README 为准）：
 
@@ -43,6 +45,7 @@ AI SDK 关键目录速览（本仓库根目录即组件目录）：
 - **LLM**：`llm/include/llm_service.h`
 - **VLM**：`vlm/include/vlm/vlm_service.h`（C++ API），`vlm/src/python/vlm.py`（Python HTTP API）
 - **Avatar**：`avatar/include/avatar_service.h`
+- **File2MD**：`file2md/include/file2md_service.h`
 
 ## 2. 构建编译
 
@@ -88,6 +91,7 @@ cd tts && mm
 cd vad && mm
 cd llm && mm
 cd avatar && mm
+cd file2md && mm
 ```
 构建产物通常会安装到 `output/staging`（以 SDK 工程为准）。
 
@@ -359,6 +363,34 @@ avatar_file_demo --persona feifan
 帧保存在 `avatar/output/feifan-frames/`，带音频的视频为 `avatar/output/feifan.mp4`（需已安装 ffmpeg）。
 
 Python 示例、命令行工具 `avatar_worker` 和配置参数见 [avatar/README.md](avatar/README.md)。
+
+### 3.8 File2MD
+
+**步骤 1：下载模型和 PDFium 运行库**
+
+```bash
+cd file2md
+bash scripts/download_models.sh
+bash scripts/download_pdfium.sh
+```
+
+模型放在 `~/.cache/models/file2md/`，PDFium 放在 `~/.cache/file2md/thirdparty/`。PDFium 为可选依赖，缺少时 PDF 渲染使用 Poppler。
+
+**步骤 2：将文档转换为 Markdown**
+
+```bash
+# 先在 SDK 根目录执行 source build/envsetup.sh 并编译 file2md（cd file2md && mm）
+file2md_demo /path/to/report.pdf --spacemit -o /tmp/file2md-output
+
+# 转换网页并识别正文图片
+file2md_demo 'https://example.com/article' --spacemit --web-img-ocr -o /tmp/file2md-output
+```
+
+Markdown 会输出到标准输出，Markdown 文件、JSON 结果和提取的图片保存在 `/tmp/file2md-output` 下。把 `--spacemit` 换成 `--cpu` 可改用 CPU 推理。
+
+Word 和 PowerPoint 文件需要 LibreOffice，XLS 文件需要 `python3-xlrd`，由 JavaScript 渲染的网页需要 Chromium。`mm` 不会安装这些运行时工具，请按需执行 `sudo apt install -y libreoffice chromium python3-xlrd`。
+
+支持的输入格式、Python 包 `spacemit_file2md` 和进度回调见 [file2md/README.md](file2md/README.md)。
 
 ## 4. 文档
 

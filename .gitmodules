@@ -46,3 +46,7 @@
 	path = avatar
 	url = https://github.com/spacemit-com/model-zoo-avatar.git
 	branch = main
+[submodule "file2md"]
+	path = file2md
+	url = https://github.com/spacemit-com/model-zoo-file2md.git
+	branch = main
